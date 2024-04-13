@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Dynamically add student information
     const studentInfo = document.getElementById('student-info');
     studentInfo.innerHTML = `<p>Student ID# 200553410 - Name: Mann Malaviya</p>`;
 });
 
+// Function to handle search button click, will request data from your own server
 function searchArtist() {
     const input = document.getElementById('search-input');
     const query = input.value;
-    const apiUrl = `https://api.deezer.com/search/artist/?q=${encodeURIComponent(query)}&output=json`;
+    const apiUrl = `/search/${encodeURIComponent(query)}`;
 
     fetch(apiUrl)
         .then(response => {
@@ -16,15 +18,7 @@ function searchArtist() {
             return response.json();
         })
         .then(data => {
-            const results = document.getElementById('search-results');
-            results.innerHTML = ''; // Clear previous results
-            data.data.forEach(artist => {
-                const artistEl = document.createElement('div');
-                artistEl.innerHTML = `<h3>${artist.name}</h3>
-                                      <img src="${artist.picture_medium}" alt="${artist.name}">
-                                      <button onclick="playTracks('${artist.id}')">Play Top Tracks</button>`;
-                results.appendChild(artistEl);
-            });
+            displayResults(data);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -32,18 +26,14 @@ function searchArtist() {
         });
 }
 
-function playTracks(artistId) {
-    const apiUrl = `https://api.deezer.com/artist/${artistId}/top?limit=5&output=json`;
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            data.data.forEach(track => {
-                const audio = new Audio(track.preview);
-                audio.play();
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching top tracks:', error);
-            alert('Failed to play tracks. Please try again.');
-        });
+// Function to display search results
+function displayResults(data) {
+    const results = document.getElementById('search-results');
+    results.innerHTML = ''; // Clear previous results
+    data.data.forEach(artist => {
+        const artistEl = document.createElement('div');
+        artistEl.innerHTML = `<h3>${artist.name}</h3>
+                              <img src="${artist.picture_medium}" alt="${artist.name}">`;
+        results.appendChild(artistEl);
+    });
 }
