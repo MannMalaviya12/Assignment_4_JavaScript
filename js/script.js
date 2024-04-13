@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Dynamically add student information
     const studentInfo = document.getElementById('student-info');
-    studentInfo.innerHTML = `<p>Student ID: 123456 - Name: John Doe</p>`;
+    studentInfo.innerHTML = `<p>Student ID# 200553410 - Name: Mann Malaviya</p>`;
 
     // API setup
     const apiKey = 'YOUR_API_KEY';
     const apiUrl = `https://api.rawg.io/api/games?key=${apiKey}`;
 
     fetch(apiUrl)
-        .then(response => response.json())
+        .then(response => response.json())   
         .then(data => displayGames(data.results));
 });
 
