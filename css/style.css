@@ -4,12 +4,12 @@ body {
 #student-info {
     margin-bottom: 20px;
 }
-#games-container {
+#music-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
-.game-item {
+.item {
     padding: 10px;
     border: 1px solid #ccc;
 }

@@ -3,21 +3,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const studentInfo = document.getElementById('student-info');
     studentInfo.innerHTML = `<p>Student ID# 200553410 - Name: Mann Malaviya</p>`;
 
-    // API setup
-    const apiKey = 'YOUR_API_KEY';
-    const apiUrl = `https://api.rawg.io/api/games?key=${apiKey}`;
+    // MusicBrainz API setup - no API key needed for basic requests
+    const apiUrl = `https://musicbrainz.org/ws/2/artist/?query=beatles&fmt=json`;
 
     fetch(apiUrl)
-        .then(response => response.json())   
-        .then(data => displayGames(data.results));
+        .then(response => response.json())
+        .then(data => displayArtists(data.artists)); // Using 'artists' based on the expected JSON structure
 });
 
-function displayGames(games) {
-    const container = document.getElementById('games-container');
-    games.forEach(game => {
-        const gameEl = document.createElement('div');
-        gameEl.className = 'game-item';
-        gameEl.innerHTML = `<h2>${game.name}</h2><p>Released: ${game.released}</p>`;
-        container.appendChild(gameEl);
+function displayArtists(artists) {
+    const container = document.getElementById('music-container'); // Ensure this ID matches in your HTML
+    artists.forEach(artist => {
+        const artistEl = document.createElement('div');
+        artistEl.className = 'artist-item'; // Changed class name for clarity
+        artistEl.innerHTML = `<h2>${artist.name}</h2><p>Country: ${artist.country || 'Unknown'}</p>`;
+        container.appendChild(artistEl);
     });
 }
