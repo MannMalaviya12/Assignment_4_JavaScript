@@ -26,3 +26,5 @@ function displayRecipes(recipes) {
         recipesContainer.appendChild(recipeElement);
     });
 }
+
+window.onload = fetchRecipes;
