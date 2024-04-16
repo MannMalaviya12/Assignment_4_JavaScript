@@ -27,4 +27,4 @@ function displayRecipes(recipes) {
     });
 }
 
-window.onload = fetchRecipes;
+fetchRecipes();  // Call the function at the end of the script to run it as soon as script is loaded
