@@ -1,39 +1,28 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Dynamically add student information
-    const studentInfo = document.getElementById('student-info');
-    studentInfo.innerHTML = `<p>Student ID# 200553410 - Name: Mann Malaviya</p>`;
-});
+const apiKey = 'eb05df76bb964678a89c063b7a14362b';
 
-// Function to handle search button click, will request data from your own server
-function searchArtist() {
-    const input = document.getElementById('search-input');
-    const query = input.value;
-    const apiUrl = `/search/${encodeURIComponent(query)}`;
-
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            displayResults(data);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            alert('Failed to fetch artist. Please try again.');
-        });
+async function fetchRecipes() {
+    try {
+        const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=5`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        displayRecipes(data.recipes);
+    } catch (error) {
+        console.error('Failed to fetch recipes:', error);
+    }
 }
 
-// Function to display search results
-function displayResults(data) {
-    const results = document.getElementById('search-results');
-    results.innerHTML = ''; // Clear previous results
-    data.data.forEach(artist => {
-        const artistEl = document.createElement('div');
-        artistEl.innerHTML = `<h3>${artist.name}</h3>
-                              <img src="${artist.picture_medium}" alt="${artist.name}">`;
-        results.appendChild(artistEl);
+function displayRecipes(recipes) {
+    const recipesContainer = document.getElementById('recipes');
+    recipesContainer.innerHTML = ''; // Clear previous recipes
+    recipes.forEach(recipe => {
+        const recipeElement = document.createElement('div');
+        recipeElement.innerHTML = `
+            <h3>${recipe.title}</h3>
+            <img src="${recipe.image}" alt="${recipe.title}" style="width:100px;height:auto;">
+            <p>${recipe.summary}</p>
+        `;
+        recipesContainer.appendChild(recipeElement);
     });
 }
