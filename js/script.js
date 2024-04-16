@@ -15,7 +15,7 @@ async function fetchRecipes() {
 
 function displayRecipes(recipes) {
     const recipesContainer = document.getElementById('recipes');
-    recipesContainer.innerHTML = ''; // Clear previous recipes
+    recipesContainer.innerHTML = ''; // It Clears previous recipes
     recipes.forEach(recipe => {
         const recipeElement = document.createElement('div');
         recipeElement.innerHTML = `

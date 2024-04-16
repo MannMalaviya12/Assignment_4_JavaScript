@@ -9,6 +9,7 @@ body {
 h1 {
     color: #444;
     text-align: center;
+    margin-bottom: 30px; /* Add some space below the header */
 }
 
 #recipes {
@@ -23,22 +24,40 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.12); /* More pronounced shadow for depth */
+    overflow: hidden; /* Keeps everything within the borders */
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe img {
+    width: 100%; /* Full width of the card */
+    height: 300px; /* Fixed height for uniformity */
+    object-fit: cover; /* Ensures the image covers the area nicely */
+    border-radius: 5px 5px 0 0; /* Rounded top corners */
 }
 
 .recipe h3 {
     color: #555;
-    font-size: 24px;
-}
-
-.recipe img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
+    font-size: 24px; /* Slightly larger font size for the title */
+    margin-top: 15px; /* Space between image and title */
 }
 
 .recipe p {
     font-size: 16px;
     color: #666;
     line-height: 1.5;
+    flex-grow: 1; /* Makes the paragraph take up remaining space */
+    margin-bottom: 15px; /* Consistent spacing at the bottom */
+}
+
+/* Responsive tweaks for smaller screens */
+@media (max-width: 600px) {
+    #recipes {
+        grid-template-columns: 1fr; /* Full width on smaller screens */
+    }
+
+    .recipe img {
+        height: 200px; /* Smaller fixed height on mobile */
+    }
 }
