@@ -1,4 +1,4 @@
-const apiKey = 'eb05df76bb964678a89c063b7a14362b';
+const apiKey = 'eb05df76bb964678a89c063b7a14362b'; //API KEY from Spoonacular
 
 async function fetchRecipes() {
     try {
