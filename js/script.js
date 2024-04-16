@@ -1,5 +1,12 @@
 const apiKey = 'eb05df76bb964678a89c063b7a14362b'; //API KEY from Spoonacular
 
+window.onload = () => {
+    fetchRecipes();  // Existing function to fetch recipes
+    const studentInfo = document.createElement('p');
+    studentInfo.textContent = '~Student ID# 200553410  ~Name: Mann Malaviya';
+    document.body.insertBefore(studentInfo, document.body.firstChild);
+};
+
 async function fetchRecipes() {
     try {
         const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=5`);
